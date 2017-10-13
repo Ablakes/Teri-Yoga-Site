@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Ablakes/Teri-Yoga-Site/issues"
   },
-  "homepage": "https://github.com/Ablakes/Teri-Yoga-Site#readme"
+  "homepage": "https://github.com/Ablakes/Teri-Yoga-Site#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
 }
