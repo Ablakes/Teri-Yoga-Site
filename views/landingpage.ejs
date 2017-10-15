@@ -1,3 +1,10 @@
 <% include partials/header %>
 
 <h1>Hello</h1>
+<a href="/new-post">New Blog Post</a>
+<h3>Blog Posts:</h3>
+<% blogposts.forEach(function(blogpost){ %>
+    <p> <%= blogpost %> </p>
+<% }); %>
+
+<% include partials/footer %>
