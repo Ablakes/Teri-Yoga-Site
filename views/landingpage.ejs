@@ -3,8 +3,8 @@
 <h1>Hello</h1>
 <a href="/new-post">New Blog Post</a>
 <h3>Blog Posts:</h3>
-<% blogposts.forEach(function(blogpost){ %>
-    <p> <%= blogpost %> </p>
+<% blogPosts.forEach(function(blogpost){ %>
+    <p> <%= blogpost.content %> </p>
 <% }); %>
 
 <% include partials/footer %>

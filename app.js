@@ -1,18 +1,32 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+var express    = require("express"),
+    app        = express(),
+    bodyParser = require("body-parser"),
+    mongoose   = require("mongoose");
 
 
+mongoose.connect("mongodb://localhost/teris_site", {useMongoClient: true});
 app.use(bodyParser.urlencoded({ extended: true }));
-
-var blogposts = ["This is one blog post"];
-
 app.set("view engine", "ejs");
+
+var blogShema = new mongoose.Schema({
+    "content": String
+});
+
+var blogPosts = mongoose.model("blogPost", blogShema);
+
+// var blogposts = ["This is one blog post"];
+
 
 app.use("/styles",express.static(__dirname + "/styles"));
 
 app.get("/", function(req, res){
-    res.render("landingpage", {blogposts:blogposts});
+        blogPosts.find({}, function(err, allBlogPosts){
+        if(err){
+            console.log(err);
+        }else{
+             res.render('landingpage', {blogPosts:allBlogPosts});
+        }
+    });
 });
 
 app.get("/new-post", function(req, res){
@@ -21,9 +35,16 @@ app.get("/new-post", function(req, res){
 
 app.post("/new", function(req, res){
     // I want to figure out how to see what "req" is/loooks like. I assume it's an object.
-    var newpost = req.body.content;
-	blogposts.push(newpost);
-    res.redirect("/"); 
+    var postContent = req.body.content;
+    var newBlog = {content: postContent};
+    blogPosts.create(newBlog, function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        }else {
+            res.redirect("/");
+        }
+    });
+    
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
