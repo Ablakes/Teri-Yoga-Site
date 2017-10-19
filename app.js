@@ -29,11 +29,11 @@ app.get("/", function(req, res){
     });
 });
 
-app.get("/new-post", function(req, res){
-	res.render("new-post");
+app.get("/newPost", function(req, res){
+	res.render("newPost");
 });
 
-app.post("/new", function(req, res){
+app.post("/newPost", function(req, res){
     // I want to figure out how to see what "req" is/loooks like. I assume it's an object.
     var postContent = req.body.content;
     var newBlog = {content: postContent};
